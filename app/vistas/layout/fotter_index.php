@@ -58,8 +58,11 @@
 
 
 
-<link href="<?=$URL_BASE?>public/css/datepicker.min.css" rel="stylesheet" type="text/css">
-<script src="<?=$URL_BASE?>public/js/datepicker.min.js"></script>
+<link href="<?=URL_BASE?>public/css/datepicker.min.css" rel="stylesheet" type="text/css">
+<script src="<?=URL_BASE?>public/js/datepicker.min.js"></script>
+<script src="<?=URL_BASE?>public/js/core.js"></script>
+<script src="<?=URL_BASE?>public/js/upload.js"></script>
+<script src="<?=URL_BASE?>public/js/uploadfun.js"></script>
 
 <!-- Include English language -->
 
@@ -69,10 +72,12 @@
 
 <script src="http://vjs.zencdn.net/6.6.3/video.js"></script>
 
+<script src="<?=URL_BASE?>public/js/update.js"></script>
 
 
 
-<script src="<?=$URL_BASE?>public/scripts/flat-ui.js"></script>
+
+<script src="<?=URL_BASE?>public/scripts/flat-ui.js"></script>
 
 
 </body>

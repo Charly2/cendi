@@ -6,7 +6,7 @@
  * Time: 01:25 AM
  */
 include_once '../modelos/Dao.php';
-class PersonaModel
+class UtilModel
 {
     private static $db = null;
     public function __construct()
@@ -21,15 +21,11 @@ class PersonaModel
         return $result;
     }
 
-    public function update ($table,$values,$rows = null,$where){
-        return $this->db->update($table,$values,$rows,$where);
-    }
 
-
-    function getbyid($id){
-        $r = $this->db->select('persona','*',"idPersona = $id",null);
+    function getEstados(){
+        $r = $this->db->select('estados','*',"",null);
         if ($this->db->getResult()){
-            return $this->db->getResult()[0];
+            return $this->db->getResult();
         }else{
             return false;
         }

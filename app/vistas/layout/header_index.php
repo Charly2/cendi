@@ -10,7 +10,8 @@
 
     <!-- Loading Flat UI Pro -->
     <link href="<?=URL_BASE?>public/css/flat-ui.css" rel="stylesheet">
-    <link rel="stylesheet" href="<?=URL_BASE?>public/css/style.css">
+    <link href="<?=URL_BASE?>public/css/upload.css" rel="stylesheet">
+
 
 
     <!--Cosas para el gob-->
@@ -21,5 +22,12 @@
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link href="<?=URL_BASE?>public/css/datepicker.min.css" rel="stylesheet" type="text/css">
+
     <script src="<?=URL_BASE?>public/js/datepicker.min.js"></script>
+
+
+    <link rel="stylesheet" href="<?=URL_BASE?>public/css/style.css">
+    <link rel="stylesheet" href="<?=URL_BASE?>public/css/_fileupload.css">
+
+
 </head>

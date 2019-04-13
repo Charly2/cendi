@@ -4,7 +4,11 @@ String.prototype.repeat = function (num) {
   return new Array(Math.round(num) + 1).join(this);
 };
 
+
+
+
 (function ($) {
+
   'use strict';
 
   // Add segments to a slider

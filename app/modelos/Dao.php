@@ -35,6 +35,7 @@ class Dao {
             try {
                 $this->db = new PDO($this->connection_string,$this->db_user, $this->db_pass);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->db -> exec("SET CHARACTER SET utf8");
                 $this->con = true;
                 return $this->con;
             } catch (PDOException $e) {
@@ -115,12 +116,40 @@ class Dao {
      
         $values = implode(',',$values);
         $insert .= ' VALUES ('.$values.')';
-
+        print_r($insert);
         try {
 
             $ins = $this->db->prepare($insert);
             $ins->execute();
             return $this->db->lastInsertId();
+
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+    }
+    // INSERT
+    public function update ($table,$values,$rows = null,$where) {
+        $insert = 'UPDATE '.$table." SET ";
+
+
+        for($i = 0; $i < count($values); $i++) {
+            if(is_string($values[$i]))
+                $insert.= $rows[$i]."='".$values[$i]."' ";
+            if($i < count($values)-1){
+                $insert .= ",  ";
+            }
+        }
+
+
+        $insert .= "WHERE ".$where;
+
+        //print_r($insert);
+
+        try {
+
+            $ins = $this->db->prepare($insert);
+            $ins->execute();
+            return true;
 
         } catch (PDOException $e) {
             return $e->getMessage();

@@ -66,12 +66,12 @@ body > .container{
   border: 1px solid #6b2848;
 
 }
-/*
+
 div[data-acc-content] { display: none;  }
 div[data-acc-step]:not(.open) { background: #f2f2f2;  }
 div[data-acc-step]:not(.open) h5 { color: #777;  }
 div[data-acc-step]:not(.open) .badge-primary { background: #ccc;  }
-*/
+
 
 
 label{
@@ -133,10 +133,46 @@ label{
 @import "landing";
 
 
+
 .headerform2{
   background: #21416b;
   color: white;
   line-height: 2.4;
   padding: 0 15px;
   border: 1px solid #21416b;
+}
+
+
+.dropzone .dz-preview .dz-image{
+  width: 60px!important;
+  height: 60px!important;
+  margin: auto;
+}
+
+.dropzone .dz-preview .dz-success-mark svg, .dropzone .dz-preview .dz-error-mark svg{
+  width: 25px!important;
+  height: 25px!important;
+}
+
+.dropzone .dz-preview .dz-success-mark, .dropzone .dz-preview .dz-error-mark{
+  top: 45px!important;
+  left: 80px!important;
+}
+
+.dropzone .dz-preview .dz-error-message{
+  top: 75px!important;
+  left: -45px!important;
+  width: 140px!important;
+}
+
+.dropzone .dz-preview{
+  width: 130px;
+}
+.dropzone {
+  min-height: unset;
+  padding: 0;
+}
+
+.form-control[disabled]{
+  color: black!important;
 }

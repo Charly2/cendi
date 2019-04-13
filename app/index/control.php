@@ -7,12 +7,15 @@
  */
 session_start();
 
-error_reporting(E_ERROR );
+error_reporting(0 );
 
 
 
 include_once '../config/config.php';
 include_once '../lib/util.php';
+
+
+
 
 $_PATH = explode('/',$_GET{'url'});
 $_PATH[1] = $_PATH[1]?$_PATH[1]:'index';
