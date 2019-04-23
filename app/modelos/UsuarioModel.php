@@ -39,4 +39,9 @@ class UsuarioModel
         $this->db->select('usuario');
         return $this->db->getResult();
     }
+
+    public function getInfo($us){
+        $this->db->select('derechohabiente','idtrabajadora,persona,numtrabajador',"usuario = '$us'",null,true);
+        return $this->db->getResult()[0];
+    }
 }

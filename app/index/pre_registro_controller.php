@@ -17,14 +17,18 @@ function index (){
 }
 
 function ok (){
+
     include_once '../modelos/DerechohabienteModel.php';
     $derechohabiente = new DerechohabienteModel();
     $r = $derechohabiente->getbyId($_SESSION['paso1']['derechohabiente']);
     if($r['derecho']['usuario']){
         setViewIndex('pre_registro_ok',[]);
+        $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
+        print_r($e);
     }else{
         $a = $derechohabiente->setuser($r['persona']['nombre'],$r['persona']['appaterno'],$_SESSION['paso1']['derechohabiente'],$r['persona']['email']);
-        print_r($a);
+        $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
+        print_r($e);
         setViewIndex('pre_registro_ok',[]);
     }
 
@@ -60,9 +64,16 @@ function continuar(){
     include_once '../modelos/DirecionModel.php';
     $derechohabiente = new DerechohabienteModel();
     $r = $derechohabiente->getbyId($num);
-    $d = new DirecionModel();
+
+
+
+
 
     $_SESSION['paso1'] = ['persona'=>$r['persona']['idPersona'],"derechohabiente"=> $r['derecho']['idtrabajadora']];  //paso1
+    if ($derechohabiente->getEstado($num)==1){
+        header("location: "._setUrl('pre_registro/ok/'));
+    }
+
 
     setViewIndex('pre_registro_paso2',["data"=>$r],null);
 }

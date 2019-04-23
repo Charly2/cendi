@@ -8,7 +8,7 @@
 include_once '../modelos/Dao.php';
 include_once '../modelos/PersonaModel.php';
 include_once '../modelos/DirecionModel.php';
-class DerechohabienteModel
+class AlumnoModel
 {
     private static $db = null;
     private static $persona = null;
@@ -23,13 +23,12 @@ class DerechohabienteModel
 
     public function crear($num){
         $persona = $this->db->insert("persona",["null"],"idPersona");
-        $dere = $this->db->insert("derechohabiente",[$persona,$num],"persona,numtrabajador");
-        $dir = $this->db->insert("direccion",["null"],"idDireccion");
-        $d = $this->db->update('persona',[$dir],['direccion'],"idPersona = '$persona' ");
+        $dere = $this->db->insert("Estudiante",[$persona,$num],"persona,madre");
+
 
        
         //return ['persona'=> $persona,'derechohabiente'=> $dere,"dir"=>$dir];
-        return $dere;
+        return ['persona'=>$persona,'alumno'=>$dere];
     }
     public function setuser($nombre,$ap,$num,$mail){
         $u= $this->db->insert("usuario",["null",$nombre,$ap.$num,1,$mail],"idUsuario,usuario,password,rol,email");

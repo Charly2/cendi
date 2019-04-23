@@ -32,9 +32,13 @@ function valida(){
 
     $_RES = $u->login($user,$password);
 
+    $_SESSION['login'] = $_RES[1][0];
+    $_SESSION['derecho'] = $u->getInfo($_RES[1][0]['idUsuario']);
+
+
     if ($_RES[0]){
-        print_r($_RES[1]);
-        echo "<h1>Bienvenidos</h1>";
+        header("Location: ".URL_BASE."/app/dashboard");
+
     }else{
         setViewIndex('login',["_ERROR"=>$_RES[1]]);
     }

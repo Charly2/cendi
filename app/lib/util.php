@@ -16,6 +16,16 @@ function setViewIndex($view,$args="",$ver = false){
     include_once '../vistas/layout_index.php';
 }
 
+function setViewApp($view,$args="",$ver = false){
+    if ($ver){
+        print_r($args);
+    }
+    extract($args);
+    $_VIEW = $view;
+    include_once '../vistas/layout_app.php';
+}
+
+
 function _setUrl($url){
     return URL_BASE.$url;
 }
