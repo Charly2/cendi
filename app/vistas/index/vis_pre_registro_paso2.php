@@ -91,9 +91,9 @@
 
                         </div>
 
-                        <div class="row rowjc " id="fileuploadedocivil">
+                        <div class="row rowjc hide" id="fileuploadedocivil">
                             <div class="col-md-8">
-                                <div class="form-group hide">
+                                <div class="form-group ">
                                     <label>Adjuntar evidencia*:</label>
                                     <form action="#" method="GET" class="form demo_form">
                                         <div class="upload" data-upload-options='{"action":"<?=_setUrl('pre_registro/fileUpload/edocivil')?>"}'></div>
@@ -230,6 +230,7 @@
                                     </select>
                                 </div>
                             </div>
+
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label>Puesto*:</label>

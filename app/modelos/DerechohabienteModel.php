@@ -32,8 +32,11 @@ class DerechohabienteModel
         return $dere;
     }
     public function setuser($nombre,$ap,$num,$mail){
+
+
         $u= $this->db->insert("usuario",["null",$nombre,$ap.$num,1,$mail],"idUsuario,usuario,password,rol,email");
-        $this->db->update('derechohabiente',[$u],["usuario"],"numtrabajador = '$num'");
+        print_r($u);
+        $this->db->update('derechohabiente',[$u],["usuario"],"idtrabajadora = '$num'");
 
         //return ['persona'=> $persona,'derechohabiente'=> $dere,"dir"=>$dir];
         return $u;
@@ -49,10 +52,33 @@ class DerechohabienteModel
             return false;
         }
     }
+    function exite_only($num){
+        $r = $this->db->select('derechohabiente','*',"numtrabajador = $num",null);
+        if ($this->db->getResult()){
+
+            return $this->db->getResult()[0];
+        }else{
+            return false;
+        }
+    }
 
     function getbyId($num){
-        $r = $this->db->select('derechohabiente','*',"numtrabajador = $num",null);
+        $r = $this->db->select('derechohabiente','*',"numtrabajador = $num",null,0);
         $derecho = $this->db->getResult()[0];
+        if ($derecho){
+            $persona = $this->persona->getbyid($derecho['persona']);
+            $dir = $this->direcion->getbyid($persona['direccion']);
+
+            return ["persona"=>$persona,"derecho"=>$derecho,"dir"=>$dir];
+        }else{
+            return false;
+        }
+    }
+    function getbyNum($num){
+        $r = $this->db->select('derechohabiente','*',"idtrabajadora = $num",null,0);
+        $derecho = $this->db->getResult()[0];
+        $der = $this->exite_only($num);
+        var_dump($der);
         if ($derecho){
             $persona = $this->persona->getbyid($derecho['persona']);
             $dir = $this->direcion->getbyid($persona['direccion']);

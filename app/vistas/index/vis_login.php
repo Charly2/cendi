@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-md-3 ">
+        <div class="col-lg-6 offset-lg-3 col-md-10 offset-md-1">
             <h2 class="text-center">Login</h2>
             <form class="login" action="<?=_setUrl('login/valida');?>" method="post" >
 

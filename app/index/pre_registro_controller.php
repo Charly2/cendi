@@ -20,13 +20,15 @@ function ok (){
 
     include_once '../modelos/DerechohabienteModel.php';
     $derechohabiente = new DerechohabienteModel();
-    $r = $derechohabiente->getbyId($_SESSION['paso1']['derechohabiente']);
+    $r = $derechohabiente->getbyNum($_SESSION['paso1']['derechohabiente']);
+
     if($r['derecho']['usuario']){
         setViewIndex('pre_registro_ok',[]);
         $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
         print_r($e);
     }else{
         $a = $derechohabiente->setuser($r['persona']['nombre'],$r['persona']['appaterno'],$_SESSION['paso1']['derechohabiente'],$r['persona']['email']);
+
         $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
         print_r($e);
         setViewIndex('pre_registro_ok',[]);

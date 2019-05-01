@@ -77,7 +77,7 @@ function muestraAlertGenero(t,d){
 function validaedoCivil(t){
     $('#fileuploadedocivil').hide();
     if ( $('#genero').val() =="masculino" && $('#edocivil').val() =="viudo" ){
-        $('#fileuploadedocivil').show();
+        $('#fileuploadedocivil').fadeIn();
         return 0;
     }
     if ( $('#genero').val() =="masculino" && $('#edocivil').val() !="viudo" ){
