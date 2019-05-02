@@ -8,9 +8,12 @@
 
 session_start();
 
-error_reporting(0);
+//error_reporting(0);
 
 
+if(!$_SESSION['app']){
+   header('Location: /cendi/login');
+}
 
 include_once '../config/config.php';
 include_once '../lib/util.php';

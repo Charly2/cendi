@@ -13,7 +13,7 @@
                     <label class="lavllo" for="login-pass">Password:</label>
                     <div class="form-group">
                         <input type="password" class="form-control login-field" value="<?=$_ERROR['pass']?>" name="password" placeholder="Ingresa tu Password" id="login-pass">
-                        <label class="login-field-icon fui-lock" for="login-pass"></label>
+                        <label class="login-fielmdd-icon fui-lock" for="login-pass"></label>
                     </div>
                     <?php if($_ERROR){?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">

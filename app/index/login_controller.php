@@ -30,7 +30,7 @@ function valida(){
         header("Location: " . URL_BASE . "login");
     }
 
-    $_RES = $u->login($user,$password);
+    $_RES = $u->login($user,md5($password));
 
     $_SESSION['login'] = $_RES[1][0];
     $_SESSION['derecho'] = $u->getInfo($_RES[1][0]['idUsuario']);

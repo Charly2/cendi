@@ -34,8 +34,8 @@ class DerechohabienteModel
     public function setuser($nombre,$ap,$num,$mail){
 
 
-        $u= $this->db->insert("usuario",["null",$nombre,$ap.$num,1,$mail],"idUsuario,usuario,password,rol,email");
-        print_r($u);
+        $u= $this->db->insert("usuario",["null",$nombre,md5(trim($ap.$num)),1,$mail],"idUsuario,usuario,password,rol,email");
+
         $this->db->update('derechohabiente',[$u],["usuario"],"idtrabajadora = '$num'");
 
         //return ['persona'=> $persona,'derechohabiente'=> $dere,"dir"=>$dir];
@@ -78,7 +78,7 @@ class DerechohabienteModel
         $r = $this->db->select('derechohabiente','*',"idtrabajadora = $num",null,0);
         $derecho = $this->db->getResult()[0];
         $der = $this->exite_only($num);
-        var_dump($der);
+
         if ($derecho){
             $persona = $this->persona->getbyid($derecho['persona']);
             $dir = $this->direcion->getbyid($persona['direccion']);

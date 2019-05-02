@@ -13,6 +13,9 @@ if (function_exists($_PATH[1])){
 
 
 function index (){
+    session_destroy();
+    unset($_SESSION);
+    session_start();
     setViewIndex('pre_registro');
 }
 
@@ -22,16 +25,18 @@ function ok (){
     $derechohabiente = new DerechohabienteModel();
     $r = $derechohabiente->getbyNum($_SESSION['paso1']['derechohabiente']);
 
+
     if($r['derecho']['usuario']){
-        setViewIndex('pre_registro_ok',[]);
         $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
-        print_r($e);
+        setViewIndex('pre_registro_ok',[]);
+        sendMail($r['persona']['email'],$r['persona']['nombre'],"Acceso al sistema Cendi",getMailLogin($r['persona']['email'],$r['persona']['appaterno'].$r['derecho']['idtrabajadora'],$r['persona']['nombre']));
     }else{
         $a = $derechohabiente->setuser($r['persona']['nombre'],$r['persona']['appaterno'],$_SESSION['paso1']['derechohabiente'],$r['persona']['email']);
 
         $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
-        print_r($e);
+
         setViewIndex('pre_registro_ok',[]);
+        sendMail($r['persona']['email'],$r['persona']['nombre'],"Acceso al sistema Cendi",getMailLogin($r['persona']['email'],$r['persona']['appaterno'].$r['derecho']['idtrabajadora'],$r['persona']['nombre']));
     }
 
 }
@@ -40,18 +45,26 @@ function ok (){
 
 function create (){
     $num = $_POST['numero'];
+
     if($num!=""){
         include_once '../modelos/DerechohabienteModel.php';
         $derechohabiente = new DerechohabienteModel();
         $r = $derechohabiente->exite($num);
         if ($r){
-            printf($r);
+            $a = $derechohabiente->getbyNum($r['idtrabajadora']);
+            $_SESSION['paso1']['derechohabiente']=$a['derecho']['idtrabajadora'] ;
+            $_SESSION['paso1']['derechohabiente_num']=$a['derecho']['numtrabajador'] ;
+            $_SESSION['paso1']['persona']=$a['derecho']['idPersona'] ;
+            $_SESSION['paso1']['dir']=$a['derecho']['idDireccion'] ;
             header("location: "._setUrl('pre_registro/continuar/'.$r));
         }else{
             $_RES=$derechohabiente->crear($num);
 
-            print_r($_RES);
-            $_SESSION['paso1']= $_RES;
+            $a = $derechohabiente->getbyNum($r['idtrabajadora']);
+            $_SESSION['paso1']['derechohabiente']=$a['derecho']['idtrabajadora'] ;
+            $_SESSION['paso1']['derechohabiente_num']=$a['derecho']['numtrabajador'] ;
+            $_SESSION['paso1']['persona']=$a['derecho']['idPersona'] ;
+            $_SESSION['paso1']['dir']=$a['derecho']['idDireccion'] ;
             header("location: "._setUrl('pre_registro/continuar/'.$_RES));
         }
     }else{
@@ -60,6 +73,9 @@ function create (){
 }
 
 function continuar(){
+    session_destroy();
+    unset($_SESSION);
+    session_start();
     global $_PATH;
     $num = $_PATH[2];
     include_once '../modelos/DerechohabienteModel.php';
@@ -67,7 +83,11 @@ function continuar(){
     $derechohabiente = new DerechohabienteModel();
     $r = $derechohabiente->getbyId($num);
 
-
+    $a = $derechohabiente->getbyNum($r['idtrabajadora']);
+    $_SESSION['paso1']['derechohabiente']=$a['derecho']['idtrabajadora'] ;
+    $_SESSION['paso1']['derechohabiente_num']=$a['derecho']['numtrabajador'] ;
+    $_SESSION['paso1']['persona']=$a['derecho']['idPersona'] ;
+    $_SESSION['paso1']['dir']=$a['derecho']['idDireccion'] ;
 
 
 
@@ -103,6 +123,8 @@ function init(){
 }
 function ver(){
     print_r($_SESSION);
+
+
 }
 function initall(){
     session_destroy();
@@ -112,10 +134,24 @@ function initall(){
 function fileUpload(){
     global $_PATH;
     $tipo = $_PATH[2];
+    $dir_ok= false;
+
+    $target_dir = "../../store/_store/_users/".$_SESSION['paso1']['derechohabiente']."/";
+    if (!is_dir($target_dir)){
+        if (mkdir($target_dir, 0777)){
+            $dir_ok = true;
+        }else{
+            $dir_ok= false;
+        }
+    }else{
+        $dir_ok = true;
+    }
+    if (!$dir_ok){die("--code--ERROR");}
+
+    $ext = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
 
 
-    $target_dir = "../uploads/";
-    $target_file = $target_dir . basename($_FILES["file"]["name"]);
+    $target_file = $target_dir . basename("evidencia_a").".".$ext;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
@@ -139,20 +175,33 @@ function fileUpload(){
 }
 
 function filePhoto(){
+
     global $_PATH;
     $tipo = $_PATH[2];
+    $dir_ok= false;
+
+    $target_dir = "../../store/_store/_users/".$_SESSION['paso1']['derechohabiente']."/";
+    if (!is_dir($target_dir)){
+        if (mkdir($target_dir, 0777)){
+            $dir_ok = true;
+        }else{
+            $dir_ok= false;
+        }
+    }else{
+        $dir_ok = true;
+    }
+    if (!$dir_ok){die("--code--ERROR");}
+
+    $ext = strtolower(pathinfo($_FILES["file"]["name"],PATHINFO_EXTENSION));
 
 
-    $target_dir = "../uploads/photos/";
-    $target_file = $target_dir . basename("perfil_"+$_SESSION['paso1']['derechohabiente'].".".end(explode('.',$_FILES['file']['name'])));
+    $target_file = $target_dir . basename("img_perfil").".".$ext;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-
 
     if (explode('/',$_FILES["file"]["type"])[0] != "image" ){
         echo "aqui--code--ERROR";die();
     }
-
 
     if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
         include_once '../modelos/Dao.php';
@@ -163,6 +212,7 @@ function filePhoto(){
     } else {
         echo "--code--ERROR";
     }
+
 
 
 
