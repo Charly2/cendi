@@ -119,7 +119,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label>Correo electrónico*:</label>
-                                    <input type="text"  class="form-control autoupdate req_this" placeholder="user@domain.com" data-valido="correo" <?=autoUpdate("persona","email",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['email'],4,25)?> />
+                                    <input type="text"  class="form-control autoupdate req_this" placeholder="user@domain.com" data-valido="correo" <?=autoUpdate("persona","email",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['email'],4,50)?> />
                                 </div>
                             </div>
                             <div class="col-md-4">
