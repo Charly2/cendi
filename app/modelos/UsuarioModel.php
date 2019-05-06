@@ -17,6 +17,7 @@ class UsuarioModel
 
     public function login($user,$password){
         $where= "email = '$user' and password = '$password'";
+        //echo $where;
         $result = $this->db->select('usuario','*',$where);
         if ($result === true){
             $r  = $this->db->getResult();
@@ -41,7 +42,7 @@ class UsuarioModel
     }
 
     public function getInfo($us){
-        $this->db->select('derechohabiente','idtrabajadora,persona,numtrabajador',"usuario = '$us'",null,true);
+        $this->db->select('derechohabiente','idtrabajadora,persona,numtrabajador',"usuario = '$us'",null,false);
         return $this->db->getResult()[0];
     }
 }

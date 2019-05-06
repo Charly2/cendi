@@ -20,6 +20,8 @@
             </li>
         </ul>
 
+
+
     </div>
 </nav>
 
@@ -44,7 +46,7 @@
                             <li><a href="#">Mensajes</a></li>
                             <li><a href="#">Configuración</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Cerrar Sesión</a></li>
+                            <li><a href="<?=URL_BASE?>/app/usuario/logout">Cerrar Sesión</a></li>
                         </ul>
                     </li>
                 </ul>
