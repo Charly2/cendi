@@ -46,19 +46,23 @@ function ok (){
 function create (){
     $num = $_POST['numero'];
 
+
     if($num!=""){
         include_once '../modelos/DerechohabienteModel.php';
         $derechohabiente = new DerechohabienteModel();
         $r = $derechohabiente->exite($num);
+
         if ($r){
-            $a = $derechohabiente->getbyNum($r['idtrabajadora']);
+            $a = $derechohabiente->getbyId($r);
             $_SESSION['paso1']['derechohabiente']=$a['derecho']['idtrabajadora'] ;
             $_SESSION['paso1']['derechohabiente_num']=$a['derecho']['numtrabajador'] ;
             $_SESSION['paso1']['persona']=$a['derecho']['idPersona'] ;
             $_SESSION['paso1']['dir']=$a['derecho']['idDireccion'] ;
-            header("location: "._setUrl('pre_registro/continuar/'.$r));
+
+
+            header("location: "._setUrl('pre_registro/continuar/'.$a['derecho']['idtrabajadora']));
         }else{
-            $_RES=$derechohabiente->crear($num);
+            $_RES=$derechohabiente->crear($num);// idDere
 
             $a = $derechohabiente->getbyNum($r['idtrabajadora']);
             $_SESSION['paso1']['derechohabiente']=$a['derecho']['idtrabajadora'] ;
@@ -80,24 +84,30 @@ function continuar(){
     $num = $_PATH[2];
     include_once '../modelos/DerechohabienteModel.php';
     include_once '../modelos/DirecionModel.php';
-    $derechohabiente = new DerechohabienteModel();
-    $r = $derechohabiente->getbyId($num);
 
-    $a = $derechohabiente->getbyNum($r['idtrabajadora']);
+
+
+
+    $derechohabiente = new DerechohabienteModel();
+
+
+    $a = $derechohabiente->getbyNum($num);
     $_SESSION['paso1']['derechohabiente']=$a['derecho']['idtrabajadora'] ;
     $_SESSION['paso1']['derechohabiente_num']=$a['derecho']['numtrabajador'] ;
     $_SESSION['paso1']['persona']=$a['derecho']['idPersona'] ;
     $_SESSION['paso1']['dir']=$a['derecho']['idDireccion'] ;
 
+    if (!$a){
+        die("SIN DATOS");
+    }
 
-
-    $_SESSION['paso1'] = ['persona'=>$r['persona']['idPersona'],"derechohabiente"=> $r['derecho']['idtrabajadora']];  //paso1
+    //$_SESSION['paso1'] = ['persona'=>$r['persona']['idPersona'],"derechohabiente"=> $r['derecho']['idtrabajadora']];  //paso1
     if ($derechohabiente->getEstado($num)==1){
         header("location: "._setUrl('pre_registro/ok/'));
     }
 
 
-    setViewIndex('pre_registro_paso2',["data"=>$r],null);
+    setViewIndex('pre_registro_paso2',["data"=>$a],null);
 }
 
 
