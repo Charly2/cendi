@@ -29,14 +29,14 @@ function ok (){
     if($r['derecho']['usuario']){
         $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
         setViewIndex('pre_registro_ok',[]);
-        sendMail($r['persona']['email'],$r['persona']['nombre'],"Acceso al sistema Cendi",getMailLogin($r['persona']['email'],$r['persona']['appaterno'].$r['derecho']['idtrabajadora'],$r['persona']['nombre']));
+        sendMail($r['persona']['email'],$r['persona']['nombre'],"Acceso al sistema Cendi",getMailLogin($r['persona']['email'],quita_acentos($r['persona']['appaterno']).$r['derecho']['idtrabajadora'],$r['persona']['nombre']));
     }else{
         $a = $derechohabiente->setuser($r['persona']['nombre'],$r['persona']['appaterno'],$_SESSION['paso1']['derechohabiente'],$r['persona']['email']);
 
         $e = $derechohabiente->setEstado('1',$_SESSION['paso1']['derechohabiente']);
 
         setViewIndex('pre_registro_ok',[]);
-        sendMail($r['persona']['email'],$r['persona']['nombre'],"Acceso al sistema Cendi",getMailLogin($r['persona']['email'],$r['persona']['appaterno'].$r['derecho']['idtrabajadora'],$r['persona']['nombre']));
+        sendMail($r['persona']['email'],$r['persona']['nombre'],"Acceso al sistema Cendi",getMailLogin($r['persona']['email'],quita_acentos($r['persona']['appaterno']).$r['derecho']['idtrabajadora'],$r['persona']['nombre']));
     }
 
 }

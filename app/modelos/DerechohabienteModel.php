@@ -34,7 +34,7 @@ class DerechohabienteModel
     public function setuser($nombre,$ap,$num,$mail){
 
 
-        $u= $this->db->insert("usuario",["null",$nombre,md5(trim($ap.$num)),1,$mail],"idUsuario,usuario,password,rol,email");
+        $u= $this->db->insert("usuario",["null",$nombre,md5(trim(quita_acentos($ap).$num)),1,$mail],"idUsuario,usuario,password,rol,email");
 
         $this->db->update('derechohabiente',[$u],["usuario"],"idtrabajadora = '$num'");
 

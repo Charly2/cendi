@@ -24,7 +24,7 @@ function valida(){
     $u = new UsuarioModel();
 
     $user = $_POST['user'];
-    $password = $_POST['password'];
+    $password = trim($_POST['password']);
 
     if ( $user=="" and $password==""){
         header("Location: " . URL_BASE . "login");
