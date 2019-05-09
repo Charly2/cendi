@@ -11,7 +11,14 @@ if (function_exists($_PATH[1])){
 
 
 function index(){
-    setViewApp('dashboard');
+    include_once '../modelos/PersonaModel.php';
+    $persona = new PersonaModel();
+
+    $p = $persona->getbyid($_SESSION['derecho']['persona']);
+
+
+
+    setViewApp('dashboard',$p);
 }
 
 

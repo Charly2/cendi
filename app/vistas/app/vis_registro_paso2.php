@@ -9,11 +9,13 @@
 </section>
 
 
-<form id="form">
+<div id="form">
 
     <div class="list-group noPadding">
 
-
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Datos del Niño o de la Niña </div>
+        </div>
 
         <div class="list-group-item py-3 noPadding" data-acc-step>
             <div class="mb-0 headerform" data-acc-title>Datos del Cónyugue </div>
@@ -221,13 +223,7 @@
                     </div>
 
 
-
-
-
-
                     <span class="subtitlereg">Datos del Centro de Trabajo</span>
-
-
 
 
                     <div class="row rowjc">
@@ -325,18 +321,19 @@
 
 
                 </div>
+                <input type="submit" id="finalizar" class="btn btn-primary float-right btnnet" value="Siguiente">
             </div>
         </div>
 
-
-
-
-
-
-
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Persona en caso necesario, pueda recoger al niño o niña</div>
+        </div>
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Documentación requerida</div>
+        </div>
     </div>
 
-</form>
+</div>
 
 
 

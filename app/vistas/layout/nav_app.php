@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse pt-2" id="navbarsExampleDefault">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link">Información Personal</a>
+                <a class="nav-link" href="<?=_setUrl('app/alumno')?>">Información Personal</a>
             </li>
 
             <li class="nav-item dropdown">

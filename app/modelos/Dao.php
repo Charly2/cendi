@@ -87,6 +87,46 @@ class Dao {
             } 
         
     }
+    // SELECT
+    public function selectRet($table, $rows = '*', $where = null, $order = null,$ver=false) {
+
+            $q = 'SELECT '.$rows.' FROM '.$table;
+            if($where != null)
+                $q .= ' WHERE '.$where;
+            if($order != null)
+                $q .= ' ORDER BY '.$order;
+            $this->numResults = null;
+            try {
+                $sql = $this->db->prepare($q);
+                if($ver){
+                    print_r($q);
+                }
+                $sql->execute();
+                return $sql->fetchAll(PDO::FETCH_ASSOC);
+            } catch (PDOException $e) {
+                return $e->getMessage().''.$e->getTraceAsString().'';
+            }
+
+    }
+    // SELECT
+    public function query($q,$ver = false) {
+
+            $this->numResults = null;
+            try {
+                $sql = $this->db->prepare($q);
+                if($ver){
+                    print_r($q);
+                }
+                $sql->execute();
+                $this->result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->numResults = count($this->result);
+                $this->numResults === 0 ? $this->result = null : true ;
+                return true;
+            } catch (PDOException $e) {
+                return $e->getMessage().''.$e->getTraceAsString().'';
+            }
+
+    }
     
     public function getResult(){
         return $this->result?$this->result:null;

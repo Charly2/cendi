@@ -50,13 +50,12 @@ class AlumnoModel
     }
 
     function getbyId($num){
-        $r = $this->db->select('derechohabiente','*',"numtrabajador = $num",null);
-        $derecho = $this->db->getResult()[0];
-        if ($derecho){
-            $persona = $this->persona->getbyid($derecho['persona']);
-            $dir = $this->direcion->getbyid($persona['direccion']);
+        $r = $this->db->select('estudiante','*',"idestudiante = $num",null);
+        $alumno = $this->db->getResult()[0];
+        if ($alumno){
+            $persona = $this->persona->getbyid($alumno['persona']);
 
-            return ["persona"=>$persona,"derecho"=>$derecho,"dir"=>$dir];
+            return ["persona"=>$persona,"estudiante"=>$alumno];
         }else{
             return false;
         }

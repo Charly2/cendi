@@ -3,13 +3,14 @@
 <section class="mb-3">
     <div class="row">
         <div class="col-md-12 text-right">
-            <span class="text-muted">09-19-13, 26-03-19, 1931 1913 2 Tueam19</span>
+            <span class="text-muted"><?=date("d/m/Y")?></span>
         </div>
     </div>
 </section>
 
 
-<form id="form">
+
+<div id="form">
 
     <div class="list-group noPadding">
 
@@ -21,19 +22,19 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Nombre (s)*:</label>
-                                <input type="text" name="" class="form-control" placeholder="Escribe aquí tu nombre" value=""/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['nombre'],4,25)?> placeholder="Escribe aquí tu nombre" value=""/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Primer apellido*:</label>
-                                <input type="text" name="" class="form-control" placeholder="Escribe aquí tu primer apellido" value=""/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['appaterno'],4,25)?> placeholder="Escribe aquí tu primer apellido" value=""/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Segundo apellido*:</label>
-                                <input type="text" name="" class="form-control" placeholder="Escribe aquí tu segundo apellido"/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['apmaterno'],4,25)?> placeholder="Escribe aquí tu segundo apellido"/>
                             </div>
                         </div>
                     </div>
@@ -41,7 +42,7 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Lugar de nacimiento*:</label>
-                                <select type="text" name="" class="form-control" >
+                                <select type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","lugarnac",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['lugarnac'],4,25)?>  >
                                     <?=getSelectEstados($data['persona']['lugarnac']);?>
                                 </select>
                             </div>
@@ -49,13 +50,13 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Fecha de nacimiento*:</label>
-                                <input type="text" name="" class="form-control fecha" placeholder="" />
+                                <input type="text" name="" class="form-control fecha autoupdate req_this" <?=autoUpdate("persona","fechanac",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['fechanac'],4,25)?>  placeholder="" />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>CURP*:</label>
-                                <input type="text" name="" class="form-control "  placeholder="Escribe aquí tu CURP"/>
+                                <input type="text" name="" class="form-control autoupdate req_this"  data-valido="curpValido" <?=autoUpdate("persona","curp",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['curp'],4,25)?>  placeholder="Escribe aquí tu CURP"/>
                             </div>
                         </div>
                     </div>
@@ -63,11 +64,11 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Grupo sanguíneo y Rh:*:</label>
-                                <select type="text" name="" class="form-control" >
-                                    <option value="a">O+</option>
-                                    <option value="a">O-</option>
-                                    <option value="a">A+</option>
-                                    <option value="a">A-</option>
+                                <select type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","gruposan",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['gruposan'],null,null)?> >
+                                    <option <?=$data['persona']['gruposan']=="o+"?"selected":""?> value="o+">O+</option>
+                                    <option <?=$data['persona']['gruposan']=="o-"?"selected":""?> value=o->O-</option>
+                                    <option <?=$data['persona']['gruposan']=="a+"?"selected":""?> value="a+">A+</option>
+                                    <option <?=$data['persona']['gruposan']=="o-"?"selected":""?> value="o-">A-</option>
                                 </select>
                             </div>
                         </div>
@@ -75,15 +76,25 @@
 
                 </div>
             </div>
+            <input type="submit" id="finalizar" class="btn btn-primary float-right btnnet" value="Siguiente">
         </div>
 
 
-        <input type="submit" id="finalizar" class="btn btn-primary float-right btnnet" value="Siguiente">
 
+
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Datos del Cónyugue </div>
+        </div>
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Persona en caso necesario, pueda recoger al niño o niña</div>
+        </div>
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Documentación requerida</div>
+        </div>
 
     </div>
 
-</form>
+</div>
 
 
 
@@ -98,6 +109,7 @@
             language: 'es',
             maxHours: 18,
             onSelect: function (fd, d, picker) {
+                $(picker.el).trigger('change')
             }
         });
         $('.hora').datepicker({
@@ -106,6 +118,7 @@
             language: 'es',
             maxHours: 18,
             onSelect: function (fd, d, picker) {
+                $(picker.el).trigger('change')
             }
         });
 
@@ -124,7 +137,8 @@
         if ($_Err > 0){
             console.log("Errores")
         } else{
-            window.location.href = "/cendi/pre_registro/ok";
+            window.location.href = "<?=URL_BASE?>app/alumno/reg_conyuge/<?=$data['estudiante']['idestudiante']?>"
+
         }
 
     });
