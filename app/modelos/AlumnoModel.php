@@ -10,7 +10,7 @@ include_once '../modelos/PersonaModel.php';
 include_once '../modelos/DirecionModel.php';
 class AlumnoModel
 {
-    private static $db = null;
+    public static $db = null;
     private static $persona = null;
     private static $direcion = null;
     public function __construct()

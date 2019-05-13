@@ -197,18 +197,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <!--<div class="col-md-8">
-                                <div class="form-group ">
-                                    <label>Señas particulares*:</label>
-                                    <input type="text" name="" class="form-control " placeholder="Escribe aquí algunos detalles de tu domicilio" />
-                                </div>
-                            </div>-->
                         </div>
-
-
-
-
-
 
                         <span class="subtitlereg">Datos del Centro de Trabajo</span>
 

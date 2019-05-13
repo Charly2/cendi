@@ -42,8 +42,16 @@ function valida(){
 
 
     if ($_RES[0]){
-        $_SESSION['app'] = $_RES[1][0];
-        header("Location: ".URL_BASE."/app/dashboard");
+        print_r($_RES);
+        if ($_RES[1][0]['rol'] =="1"){
+            $_SESSION['app'] = $_RES[1][0];
+            header("Location: ".URL_BASE."/app/index");
+        }else{
+            $_SESSION['admin'] = $_RES[1][0];
+            header("Location: ".URL_BASE."/admin/index");
+        }
+
+
 
     }else{
         setViewIndex('login',["_ERROR"=>$_RES[1]]);

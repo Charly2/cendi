@@ -75,7 +75,7 @@ class Dao {
             try {
                 $sql = $this->db->prepare($q);
                 if($ver){
-                    print_r($q);
+                   // print_r($q);
                 }
                 $sql->execute();
                 $this->result = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -99,7 +99,7 @@ class Dao {
             try {
                 $sql = $this->db->prepare($q);
                 if($ver){
-                    print_r($q);
+                   // print_r($q);
                 }
                 $sql->execute();
                 return $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -122,6 +122,24 @@ class Dao {
                 $this->numResults = count($this->result);
                 $this->numResults === 0 ? $this->result = null : true ;
                 return true;
+            } catch (PDOException $e) {
+                return $e->getMessage().''.$e->getTraceAsString().'';
+            }
+
+    }
+    public function queryRet($q,$ver = false) {
+
+            $this->numResults = null;
+            try {
+                $sql = $this->db->prepare($q);
+                if($ver){
+                    //print_r($q);
+                }
+                $sql->execute();
+                $this->result = $sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->numResults = count($this->result);
+                $this->numResults === 0 ? $this->result = null : true ;
+                return $sql->fetchAll(PDO::FETCH_ASSOC);
             } catch (PDOException $e) {
                 return $e->getMessage().''.$e->getTraceAsString().'';
             }
@@ -168,7 +186,7 @@ class Dao {
         }
     }
     // INSERT
-    public function update ($table,$values,$rows = null,$where) {
+    public function update ($table,$values,$rows = null,$where,$ver = false) {
         $insert = 'UPDATE '.$table." SET ";
 
 
@@ -183,11 +201,14 @@ class Dao {
 
         $insert .= "WHERE ".$where;
 
-        //print_r($insert);
-
+        print_r($insert);
+        if($ver){
+            //print_r($insert);
+        }
         try {
 
             $ins = $this->db->prepare($insert);
+
             $ins->execute();
             return true;
 

@@ -10,10 +10,6 @@ if (function_exists($_PATH[1])){
 
 
 function prueba(){
-    include_once '../modelos/UsuarioModel.php';
-    $u = new UsuarioModel();
-    print_r($u->login('oscar','123'));
-
 
 }
 

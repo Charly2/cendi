@@ -8,6 +8,8 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
+$_TIPODOC = ['doc1'=>1,'doc1'=>1,'doc2'=>2,'doc3'=>3,'doc4'=>4,'doc5'=>5,'doc6'=>6,'doc7'=>7,'doc8'=>8,'doc9'=>9];
+
 function setViewIndex($view,$args="",$ver = false){
     if ($ver){
         print_r($args);
@@ -24,6 +26,14 @@ function setViewApp($view,$args="",$ver = false){
     extract($args);
     $_VIEW = $view;
     include_once '../vistas/layout_app.php';
+}
+function setViewAdmin($view,$args="",$ver = false){
+    if ($ver){
+        print_r($args);
+    }
+    extract($args);
+    $_VIEW = $view;
+    include_once '../vistas/layout_admin.php';
 }
 
 
@@ -71,6 +81,18 @@ function getSelectEstados($a)
         $nombre = $estado['estado'];
         $se = $a==$nombre?"selected":"";
         $ret .= "<option value='$nombre' $se >$nombre</option>";
+    }
+    return $ret;
+}
+
+
+function getParentesco($a)
+{
+    $ret = "";
+    $arr = [['MADRE','Madre'],['PADRE','Padre'],['TIA','Tía(o)'],['HERMANA','Hermana(o)'],['ABUELA','Abuela(o)'],['OTRO','Otro']];
+    foreach ($arr as $ar){
+        $t = $ar[0]==$a?"selected":"";
+        $ret .= "<option value='".$ar[0]."' $t >".$ar[1]."</option>";
     }
     return $ret;
 }

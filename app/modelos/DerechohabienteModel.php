@@ -74,6 +74,24 @@ class DerechohabienteModel
             return false;
         }
     }
+
+
+
+    function getDireccion($num){
+        $r = $this->db->select('derechohabiente','*',"numtrabajador = $num",null,0);
+        $derecho = $this->db->getResult()[0];
+        if ($derecho){
+            $persona = $this->persona->getbyid($derecho['persona']);
+            $dir = $this->direcion->getbyid($persona['direccion']);
+
+            return $dir;
+        }else{
+            return false;
+        }
+    }
+
+
+
     function getbyNum($num){
         $r = $this->db->select('derechohabiente','*',"idtrabajadora = $num",null,0);
         $derecho = $this->db->getResult()[0];

@@ -1,7 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: CHARLY
- * Date: 07/04/2019
- * Time: 11:37 PM
- */
+include_once 'layout/header_admin.php';
+include_once 'layout/nav_admin.php';?>
+
+    <div class="container">
+
+
+        <? include_once 'admin/vis_'.$_VIEW.".php";?>
+
+    </div>
+
+
+<?
+include_once 'layout/fotter_admin.php';
+?>

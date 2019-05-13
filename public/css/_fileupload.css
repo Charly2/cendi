@@ -21,7 +21,7 @@
   border-bottom: 1px solid #ECEFF1;
   font-size: 14px;
   list-style: none;
-  padding: 5px;
+  line-height: 1.5;
   position: relative; }
 
 .filelist li:before {

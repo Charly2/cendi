@@ -12,7 +12,7 @@ if (function_exists($_PATH[1])){
 
 function index(){
 
-    echo getMailLogin("d","d","d");
+    echo md5("qwer1234");
 }
 
 
