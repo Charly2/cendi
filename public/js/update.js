@@ -1,3 +1,9 @@
+$_MSG = {
+    'curpValido':'No es un CURP valido',
+    'numtelefono': 'No es un número telefónico valido',
+    'correo': 'No es un correo electrónico valido',
+    'numeric': 'No es un valor numérico valido',
+};
 $(document).ready(function (e) {
     $('.autoupdate').change(function (e) {
         let ESTADO = 0;
@@ -25,7 +31,8 @@ $(document).ready(function (e) {
             });
         }else{
             console.log("ERROS");
-            input.setEstatus('error');
+
+            input.setEstatus('error',$_MSG[this.dataset.valido]);
         }
 
 
@@ -117,12 +124,24 @@ function numeric(t){
 
 
 
-$.fn.setEstatus = function(e){
-    if (e!=""){
+$.fn.setEstatus = function(e,error=""){
+
+    if (e=="error"){
         $(this).removeClass('has-success').removeClass('has-error').addClass('has-'+e);
+        if ($(this).children('span.span_error').length){
+            $(this).children('span.span_error').text(error);
+        } else{
+            $(this).append("<span class='text-danger span_error'>"+error+"</span>");
+        }
+
     }else{
         $(this).removeClass('has-success').removeClass('has-error');
+        $(this).children('span.span_error').fadeOut('slow',function () {
+            $(this).remove();
+        });
+
     }
+
 }
 
 

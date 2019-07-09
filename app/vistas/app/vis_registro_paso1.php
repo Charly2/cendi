@@ -1,9 +1,9 @@
-<h1 class="text-center">Pre-registro de Inscripción</h1>
+<h2 class="text-center">Prerregistro de Inscripción</h2>
 <h3>Ficha de Identificación</h3>
 <section class="mb-3">
     <div class="row">
         <div class="col-md-12 text-right">
-            <span class="text-muted"><?=date("d/m/Y")?></span>
+
         </div>
     </div>
 </section>
@@ -22,19 +22,19 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Nombre (s)*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['nombre'],4,25)?> placeholder="Escribe aquí tu nombre" value=""/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['nombre'],2,25)?> placeholder="Escribe aquí tu nombre" value=""/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Primer apellido*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['appaterno'],4,25)?> placeholder="Escribe aquí tu primer apellido" value=""/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['appaterno'],2,25)?> placeholder="Escribe aquí tu primer apellido" value=""/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Segundo apellido*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['apmaterno'],4,25)?> placeholder="Escribe aquí tu segundo apellido"/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['apmaterno'],2,25)?> placeholder="Escribe aquí tu segundo apellido"/>
                             </div>
                         </div>
                     </div>
@@ -125,17 +125,25 @@
     });
 
     $('#finalizar').click(function (e) {
-
+        if ($('#finalizar').next('.alert').length){
+            $('#finalizar').next('.alert').remove();
+        }
         $_Err = 0;
         $('.req_this').each(function (e) {
             if (this.value == "" ){4
                 $_Err +=1;
-                $(this).parent().setEstatus('error')
+                $(this).parent().setEstatus('error',"Este campo es obligatorio");
             }
         });
         console.log($_Err)
         if ($_Err > 0){
-            console.log("Errores")
+            console.log("Errores");
+            $(this).after('<div class="alert alert-danger alert-dismissible fade show" role="alert" style="    margin: 65px 15px 15px 15px;">\n' +
+                '  <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                '    <span aria-hidden="true">&times;</span>\n' +
+                '  </button>\n' +
+                '  <strong>¡Omitiste uno o más campos marcados como obligatorios!</strong> <br> Porfavor ingresa información en los campos marcados con *.\n' +
+                '</div>')
         } else{
             window.location.href = "<?=URL_BASE?>app/alumno/reg_conyuge/<?=$data['estudiante']['idestudiante']?>"
 

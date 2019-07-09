@@ -78,24 +78,24 @@
         </div>
     </section>
 </div>
-<section style="    background: #6a2847;min-height: 230px;color: white;">
+<section style="    background: #6a2847;min-height: 80px;color: white;">
     <div class="container">
         <div class="row">
             <div class="col-md-3 text-center">
-                <span class="fui-list-columned " style="font-size: 80px"></span>
-                <h4 class="text-center m-auto">Llena tu preregistro</h4>
+                <span class="fui-list-columned " style="font-size: 30px"></span>
+                <h4 style="font-size: 15px" class="text-center m-auto">Llena tu preregistro</h4>
             </div>
             <div class="col-md-3 text-center">
-                <span class="fui-check " style="font-size: 80px"></span>
-                <h4 class="text-center m-auto">Conoce tu resultado</h4>
+                <span class="fui-check " style="font-size: 30px"></span>
+                <h4 style="font-size: 15px" class="text-center m-auto">Conoce tu resultado</h4>
             </div>
             <div class="col-md-3 text-center">
-                <span class="fui-user" style="font-size: 80px"></span>
-                <h4 class="text-center m-auto">Asiste a tu entrevista</h4>
+                <span class="fui-user" style="font-size: 30px"></span>
+                <h4 style="font-size: 15px" class="text-center m-auto">Asiste a tu entrevista</h4>
             </div>
             <div class="col-md-3 text-center">
-                <span class="fui-calendar" style="font-size: 80px"></span>
-                <h4 class="text-center m-auto">Finaliza tu inscripcion</h4>
+                <span class="fui-calendar" style="font-size: 30px"></span>
+                <h4 style="font-size: 15px" class="text-center m-auto">Finaliza tu inscripcion</h4>
             </div>
         </div>
     </div>

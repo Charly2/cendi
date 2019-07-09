@@ -18,7 +18,7 @@ class PreRegistroModel
     public function crearPreregistro($num,$tipo){
 
         $result = $this->db->insert("Inscripcion",["null"],"idinscripcion");
-        print_r($result);
+        //print_r($result);
     }
 
 

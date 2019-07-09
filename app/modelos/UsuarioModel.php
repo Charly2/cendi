@@ -42,7 +42,8 @@ class UsuarioModel
     }
 
     public function getInfo($us){
-        $this->db->select('derechohabiente','idtrabajadora,persona,numtrabajador',"usuario = '$us'",null,false);
+        //$this->db->select('derechohabiente','idtrabajadora,persona,numtrabajador',"usuario = '$us'",null,false);
+        $this->db->queryRet("SELECT * from derechohabiente d INNER JOIN persona p on d.persona = p.idPersona where d.usuario = '$us'");
         return $this->db->getResult()[0];
     }
 }

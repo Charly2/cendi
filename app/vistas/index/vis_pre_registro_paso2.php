@@ -1,12 +1,12 @@
 
-<div class="container">
-    <h1 class="text-center">Pre-registro de Inscripción</h1>
+
+    <h2 class="text-center">Prerregistro de Inscripción</h2>
     <h3>Ficha de Identificación</h3>
 
     <section class="mb-3">
         <div class="row">
             <div class="col-md-12 text-right">
-                <span class="text-muted"><?=date('h-i-s, j-m-y, it is w Day')?></span>
+
             </div>
         </div>
     </section>
@@ -26,19 +26,19 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label>Nombre (s)*:</label>
-                                    <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['nombre'],4,25)?>    placeholder="Escribe aquí tu nombre" />
+                                    <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['nombre'],2,25)?>    placeholder="Escribe aquí tu nombre" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label>Primer apellido*:</label>
-                                    <input type="text"   <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['appaterno'],4,25)?> class="form-control autoupdate req_this" placeholder="Escribe aquí tu primer apellido" />
+                                    <input type="text"   <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['appaterno'],2,25)?> class="form-control autoupdate req_this" placeholder="Escribe aquí tu primer apellido" />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Segundo apellido*:</label>
-                                    <input type="text"  class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['apmaterno'],4,25)?> placeholder="Escribe aquí tu segundo apellido"/>
+                                    <input type="text"  class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['apmaterno'],2,25)?> placeholder="Escribe aquí tu segundo apellido"/>
                                 </div>
                             </div>
                         </div>
@@ -97,6 +97,7 @@
                                     <label>Adjuntar evidencia*:</label>
                                     <form action="#" method="GET" class="form demo_form">
                                         <div class="upload" data-upload-options='{"action":"<?=_setUrl('pre_registro/fileUpload/edocivil')?>"}'></div>
+                                        <p class="info_docs">Formato: PDF o JPG. Tamaño máximo: 4 Mb</p>
                                         <div class="filelists">
                                             <ol class="filelist complete">
                                                 <li data-index="0"><span class="content"><span class="file" style="color: rgb(255, 255, 255);"><?=$data['derecho']['evidencia_a']?></span></span><span class="bar" style="width: 100%; background: rgb(47, 191, 65);"></span></li>
@@ -139,7 +140,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label>Telefono de Trabajo*:</label>
-                                    <div class="d-flex">
+                                    <div class="d-flex flex-wrap">
                                         <input type="text" name="" class="form-control w180 autoupdate req_this" placeholder="xx-xx-xx-xx" data-valido="numtelefono" <?=autoUpdate("persona","telefono_trabajo ",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['telefono_trabajo'],4,25)?> />
                                     </div>
                                 </div>
@@ -229,7 +230,10 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label>Escolaridad*:</label>
-                                    <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","escolaridad",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['escolaridad'],4,25)?> placeholder="Escribe aquí tu escolaridad" />
+                                    <!--<input type="text" name="" class="form-control autoupdate req_this" <?/*=autoUpdate("persona","escolaridad",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['escolaridad'],4,25)*/?> placeholder="Escribe aquí tu escolaridad" />-->
+                                    <select type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","escolaridad",encryptIt($data['persona']['idPersona']),'pre_registro/update',$data['persona']['escolaridad'],4,25)?>  >
+                                        <?=getSelectNivelEducativo($data['persona']['escolaridad']);?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -274,6 +278,7 @@
                                     <label class="lw100">Adjuntar Fotografía*:</label>
                                     <form action="#" method="GET" class="form demo_form">
                                         <div class="upload" data-upload-options='{"action":"<?=_setUrl('pre_registro/filePhoto')?>"}'></div>
+                                        <p class="info_docs">Formato: PDF o JPG. Tamaño máximo: 4 Mb</p>
                                         <div class="filelists">
                                             <ol class="filelist complete">
 
@@ -294,7 +299,7 @@
         </div>
 
     </div>
-</div>
+
 
 <style>
    
@@ -346,6 +351,7 @@
             b.css('background','#2fbf41')
         }
     }
+
 
 
 

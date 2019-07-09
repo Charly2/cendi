@@ -1,9 +1,9 @@
-<h1 class="text-center">Pre-registro de Inscripción</h1>
+<h2 class="text-center">Prerregistro de Inscripción</h2>
 <h3>Ficha de Identificación</h3>
 <section class="mb-3">
     <div class="row">
         <div class="col-md-12 text-right">
-            <span class="text-muted">09-19-13, 26-03-19, 1931 1913 2 Tueam19</span>
+
         </div>
     </div>
 </section>
@@ -12,6 +12,13 @@
 <div id="form">
 
     <div class="list-group noPadding">
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Datos del Niño o de la Niña </div>
+        </div>
+
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Datos del Cónyugue </div>
+        </div>
 
         <div class="list-group-item py-3 noPadding" data-acc-step>
             <div class="mb-0 headerform" data-acc-title>Persona en caso necesario, pueda recoger al niño o niña </div>
@@ -21,19 +28,19 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Nombre (s)*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['nombre'],4,25)?> placeholder="Escribe aquí tu nombre" />
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","nombre",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['nombre'],2,25)?> placeholder="Escribe aquí tu nombre" />
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Primer apellido*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['appaterno'],4,25)?> placeholder="Escribe aquí tu primer apellido" value=""/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","appaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['appaterno'],2,25)?> placeholder="Escribe aquí tu primer apellido" value=""/>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label>Segundo apellido*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['apmaterno'],4,25)?> placeholder="Escribe aquí tu segundo apellido"/>
+                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","apmaterno",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['apmaterno'],2,25)?> placeholder="Escribe aquí tu segundo apellido"/>
                             </div>
                         </div>
                     </div>
@@ -99,7 +106,10 @@
                         <div class="col-md-4">
                             <div class="form-group ">
                                 <label>Escolaridad*:</label>
-                                <input type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","escolaridad",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['escolaridad'],4,25)?>  placeholder="Escribe aquí tu escolaridad" />
+                                <!--<input type="text" name="" class="form-control autoupdate req_this" <?/*=autoUpdate("persona","escolaridad",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['escolaridad'],4,25)*/?>  placeholder="Escribe aquí tu escolaridad" />-->
+                                <select type="text" name="" class="form-control autoupdate req_this" <?=autoUpdate("persona","escolaridad",encryptIt($data['persona']['idPersona']),'app/alumno/update',$data['persona']['escolaridad'],4,25)?>  >
+                                    <?=getSelectNivelEducativo($data['persona']['escolaridad']);?>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -258,7 +268,9 @@
         </div>
 
 
-
+        <div class="list-group-item py-3 noPadding" data-acc-step>
+            <div class="mb-0 headerform" data-acc-title>Documentación requerida </div>
+        </div>
 
 
 
@@ -294,17 +306,25 @@
 
 
         $('#finalizar').click(function (e) {
-
+            if ($('#finalizar').next('.alert').length){
+                $('#finalizar').next('.alert').remove();
+            }
             $_Err = 0;
             $('.req_this').each(function (e) {
                 if (this.value == "" ){4
                     $_Err +=1;
-                    $(this).parent().setEstatus('error')
+                    $(this).parent().setEstatus('error',"Este campo es obligatorio");
                 }
             });
             console.log($_Err)
             if ($_Err > 0){
                 console.log("Errores")
+                $(this).after('<div class="alert alert-danger alert-dismissible fade show" role="alert" style="    margin: 65px 15px 15px 15px;">\n' +
+                    '  <button type="button" class="close" data-dismiss="alert" aria-label="Close">\n' +
+                    '    <span aria-hidden="true">&times;</span>\n' +
+                    '  </button>\n' +
+                    '  <strong>¡Omitiste uno o más campos marcados como obligatorios!</strong> <br> Porfavor ingresa información en los campos marcados con *.\n' +
+                    '</div>')
             } else{
                 window.location.href = "<?=URL_BASE?>app/alumno/reg_documentos/<?=$alumnno['estudiante']['idestudiante']?>"
 

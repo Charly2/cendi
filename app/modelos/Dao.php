@@ -115,7 +115,7 @@ class Dao {
             try {
                 $sql = $this->db->prepare($q);
                 if($ver){
-                    print_r($q);
+                    //print_r($q);
                 }
                 $sql->execute();
                 $this->result = $sql->fetchAll(PDO::FETCH_ASSOC);
@@ -174,7 +174,7 @@ class Dao {
      
         $values = implode(',',$values);
         $insert .= ' VALUES ('.$values.')';
-        print_r($insert);
+        //print_r($insert);
         try {
 
             $ins = $this->db->prepare($insert);
@@ -201,7 +201,7 @@ class Dao {
 
         $insert .= "WHERE ".$where;
 
-        print_r($insert);
+       // print_r($insert);
         if($ver){
             //print_r($insert);
         }

@@ -267,3 +267,16 @@ header.masthead .intro-text .intro-heading {
 
 .form-control[disabled] {
   color: black !important; }
+
+.span_error {
+  color: #e74c3c;
+  font-size: 15px;
+  display: block; }
+
+.flex-wrap {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+
+.info_docs {
+  font-size: 13px;
+  margin: 5px 0; }

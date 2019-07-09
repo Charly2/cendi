@@ -27,7 +27,7 @@
             <li><a href="<?=_setUrl('index');?>" class="<?=$url=='index'?'active':''?>">Inicio</a></li>
             <li><a href="#fakelink">¿Quiénes somos?</a></li>
             <li><a href="<?=_setUrl('requisitos');?>" class="<?=$url=='requisitos'?'active':''?>">Requisitos de Inscripción</a></li>
-            <li><a href="<?=_setUrl('pre_registro');?>" class="<?=$url=='preregistro'||$url=='pre_registro'||$url=='registrocompleto'?'active':''?>">Preregistro</a></li>
+            <li><a href="<?=_setUrl('pre_registro');?>" class="<?=$url=='preregistro'||$url=='pre_registro'||$url=='registrocompleto'?'active':''?>">Prerregistro</a></li>
         </ul>
 
         <div class="navbar-form form-inline my-2 my-lg-0">

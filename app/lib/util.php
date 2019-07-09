@@ -10,12 +10,23 @@ use PHPMailer\PHPMailer\Exception;
 
 $_TIPODOC = ['doc1'=>1,'doc1'=>1,'doc2'=>2,'doc3'=>3,'doc4'=>4,'doc5'=>5,'doc6'=>6,'doc7'=>7,'doc8'=>8,'doc9'=>9];
 
+$_GRADO_ESTUDIO = [
+    'Primaria','Secundaria','Preparatoria','Universidad','Doctorado'
+];
+
 function setViewIndex($view,$args="",$ver = false){
     if ($ver){
         print_r($args);
     }
     extract($args);
     $_VIEW = $view;
+    include_once '../vistas/layout_index.php';
+}
+
+function setErrorIndex($args="Ocurrio un error"){
+
+    $_ERROR = $args;
+    $_VIEW = "error_custom";
     include_once '../vistas/layout_index.php';
 }
 
@@ -81,6 +92,21 @@ function getSelectEstados($a)
         $nombre = $estado['estado'];
         $se = $a==$nombre?"selected":"";
         $ret .= "<option value='$nombre' $se >$nombre</option>";
+    }
+    return $ret;
+}
+
+
+
+
+function getSelectNivelEducativo($a)
+{
+    global $_GRADO_ESTUDIO;
+    $ret = "";
+    foreach ($_GRADO_ESTUDIO as $estado) {
+
+        $se = $a==$estado?"selected":"";
+        $ret .= "<option value='$estado' $se >$estado</option>";
     }
     return $ret;
 }
@@ -160,7 +186,7 @@ function getMailLogin($mail,$pass,$nombre){
 				<table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
 					<tr>
 						<td align="center" bgcolor="#6C1D45" style="padding: 1px 1px 1px 1px; color: #153643; font-size: 28px; font-weight: bold; font-family: Arial, sans-serif;">
-							<img src="/cendi/public/images/logo/cover_logo.jpg" alt="Cover-IPN" width="100%" height="90" style="display: block; border: 1px solid rgb(108, 29, 69);box-sizing: border-box;" />
+							<img src="http://18.219.238.169/cendi/public/images/logo/cover_logo.jpg?id'.rand(1,90).'= aa'.rand(5,80).'" alt="Cover-IPN" width="100%" height="90" style="display: block; border: 1px solid rgb(108, 29, 69);box-sizing: border-box;" />
 						</td>
 					</tr>
 					<tr>

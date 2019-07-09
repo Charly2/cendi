@@ -26,4 +26,7 @@ $_PATH[1] = $_PATH[1]?$_PATH[1]:'index';
 $_PATH[0] = $_PATH[0]?$_PATH[0]:'index';
 
 include_once $_PATH[0].'_controller.php';
+
+
+//include_once 'prueba_l.php';
 ?>

@@ -48,6 +48,22 @@ function create (){
 
 
     if($num!=""){
+
+
+
+        if ((is_numeric($num)) and  strlen($num) > 5  and strlen($num) < 8 ){
+
+        }else{
+
+            setErrorIndex("\"".$num ."\" <br> No es un número de empleado valido");
+
+            exit(0);
+
+        }
+
+
+
+
         include_once '../modelos/DerechohabienteModel.php';
         $derechohabiente = new DerechohabienteModel();
         $r = $derechohabiente->exite($num);
@@ -72,7 +88,7 @@ function create (){
             header("location: "._setUrl('pre_registro/continuar/'.$_RES));
         }
     }else{
-        echo "FALTA INFO";
+        setErrorIndex("Faltan datos para completar tu preregistro");
     }
 }
 
@@ -154,6 +170,7 @@ function fileUpload(){
             $dir_ok= false;
         }
     }else{
+
         $dir_ok = true;
     }
     if (!$dir_ok){die("--code--ERROR");}

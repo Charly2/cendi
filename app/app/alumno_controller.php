@@ -101,7 +101,7 @@ function reg_persona_autorizada(){
 
 
     if (!$p['estudiante']['personaautorizada']){
-        $p['estudiante']['idestudiante'] = $personaAutorizada->crear($p['estudiante']['idestudiante']);
+        $p['estudiante']['personaautorizada'] = $personaAutorizada->crear($p['estudiante']['idestudiante']);
     }
 
 
